@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Login</string>
+    <string name="title">Job aplication</string>
+    <string name="subtitle">Por favor complete la información solicitada</string>
+    <string name="eFullName">Full name:</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="eCurrentAddress">Current Address</string>
+    <string name="streetAddress">Street Address</string>
+    <string name="streetAddres_2">Street line 2</string>
+    <string name="eCity">City</string>
+    <string name="zipCode">Portal/Zip Code</string>
+    <string name="emailAddress">Email Address</string>
+    <string name="emailAddress_1">ex: name@email.com</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="areaCode">Area code</string>
+    <string name="ePosition">Applying for Position</string>
+    <string name="eDate">Start date</string>
+    <string name="eUpload">Upload Resume</string>
+    <string name="upload">Submit</string>
+    <string name="phoneNumber_1">Phone Number</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_file">File</string>
+</resources>
