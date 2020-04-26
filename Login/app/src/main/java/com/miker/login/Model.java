@@ -32,8 +32,8 @@ public class Model implements Serializable {
     public void generate_aplications() {
         aplications.addAll(
                 Arrays.asList(
-                        new Aplication("prueba", "1", "","","","","","","","","","",new Date()),
-                        new Aplication("prueba", "2", "","","","","","","","","","",new Date())
+                        new Aplication(1, "prueba", "1", "","","","","","","","","","",new Date()),
+                        new Aplication(2, "prueba", "2", "","","","","","","","","","",new Date())
                 )
         );
     }
@@ -48,6 +48,32 @@ public class Model implements Serializable {
 
     public List<Aplication> getAplications() {
         return aplications;
+    }
+
+    public void insertAplication(Aplication aplication){
+        aplication.setId(aplications.size()+1);
+        aplications.add(aplication);
+    }
+
+    public void updateAplication(Aplication aplication){
+        for(Aplication a : aplications){
+            if(a.getId() == aplication.getId()){
+                a.setFirst_name(aplication.getFirst_name());
+                a.setLast_name(aplication.getLast_name());
+                a.setAddress_1(aplication.getAddress_1());
+                a.setAddress_2(aplication.getAddress_2());
+                a.setCity(aplication.getCity());
+                a.setState(aplication.getState());
+                a.setCode(aplication.getCode());
+                a.setCountry(aplication.getCountry());
+                a.setEmail(aplication.getEmail());
+                a.setPhone_area(aplication.getPhone_area());
+                a.setPhone_number(aplication.getPhone_number());
+                a.setPosicion(aplication.getPosicion());
+                a.setDate(aplication.getDate());
+                break;
+            }
+        }
     }
 
     public void setAplications(List<Aplication> aplications) {
