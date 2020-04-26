@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/ic_menu_today"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_aplicar"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Aplicar" />
+        <item
+            android:id="@+id/nav_button"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Button" />
+    </group>
+    <item android:title="Salir">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Logout" />
+        </menu>
+    </item>
+</menu>
