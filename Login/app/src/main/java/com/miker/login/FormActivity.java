@@ -10,9 +10,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -41,7 +43,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText phone_area;
     private EditText phone_number;
     private Spinner posicion;
-    private EditText date;
+    private TextView date;
     private ImageButton button;
     private Aplication aplication;
     private Model model;
@@ -52,7 +54,6 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
         // initiate a button
         model = (Model) getIntent().getSerializableExtra("model");
-        aplication = new Aplication();
         button = (ImageButton) findViewById(R.id.btn);
         first_name = (EditText) findViewById(R.id.first_name);
         last_name = (EditText) findViewById(R.id.last_name);
@@ -66,7 +67,7 @@ public class FormActivity extends AppCompatActivity {
         phone_area = (EditText) findViewById(R.id.phone_area);
         phone_number = (EditText) findViewById(R.id.phone_number);
         posicion = (Spinner) findViewById(R.id.position);
-        date = (EditText) findViewById(R.id.date);
+        date = (TextView) findViewById(R.id.date);
         // perform click event on the button
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,11 +86,22 @@ public class FormActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getInformation();
                 model.getAplications().add(aplication);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent;
+                if (getIntent().getSerializableExtra("admin") == null) {
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                } else {
+                    intent = new Intent(getApplicationContext(), ListActivity.class);
+                }
                 intent.putExtra("model", model);
                 startActivityForResult(intent, 0);
             }
         });
+        aplication = (Aplication) getIntent().getSerializableExtra("aplication");
+        if (aplication == null) {
+            aplication = new Aplication();
+        } else {
+            setInformation();
+        }
     }
 
     private void obtenerFecha() {
@@ -128,5 +140,32 @@ public class FormActivity extends AppCompatActivity {
         aplication.setPhone_number(phone_number.getText().toString());
         aplication.setPosicion(posicion.getSelectedItem().toString());
         aplication.setDate(new Date(date.getText().toString()));
+    }
+
+    private void setInformation() {
+        first_name.setText(aplication.getFirst_name());
+        last_name.setText(aplication.getLast_name());
+        address_1.setText(aplication.getAddress_1());
+        address_2.setText(aplication.getAddress_2());
+        city.setText(aplication.getCity());
+        state.setText(aplication.getState());
+        code.setText(aplication.getCode());
+        setSelected(country, model.country, aplication.getCountry());
+        email.setText(aplication.getEmail());
+        phone_area.setText(aplication.getPhone_area());
+        phone_number.setText(aplication.getPhone_number());
+        setSelected(posicion, model.position, aplication.getPosicion());
+        date.setText(aplication.getDate().toString());
+    }
+
+    private void setSelected(Spinner spinner, String[] options, String option) {
+        int aux = 0;
+        for (String o : options) {
+            if (o.equals(option)) {
+                spinner.setSelection(aux);
+                break;
+            }
+            aux++;
+        }
     }
 }

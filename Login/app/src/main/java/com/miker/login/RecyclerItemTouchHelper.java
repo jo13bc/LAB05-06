@@ -122,16 +122,12 @@
             }
 
             private void drawBackground(float dX) {
-                if (this.listener.getClass().getSimpleName().equals("ListActivity")) {
-                    backgroundViewDelete.setVisibility(View.VISIBLE);
+                if (dX > 0) {
+                    backgroundViewEdit.setVisibility(View.VISIBLE);
+                    backgroundViewDelete.setVisibility(View.GONE);
                 } else {
-                    if (dX > 0) {
-                        backgroundViewEdit.setVisibility(View.VISIBLE);
-                        backgroundViewDelete.setVisibility(View.GONE);
-                    } else {
-                        backgroundViewDelete.setVisibility(View.VISIBLE);
-                        backgroundViewEdit.setVisibility(View.GONE);
-                    }
+                    backgroundViewDelete.setVisibility(View.VISIBLE);
+                    backgroundViewEdit.setVisibility(View.GONE);
                 }
             }
 

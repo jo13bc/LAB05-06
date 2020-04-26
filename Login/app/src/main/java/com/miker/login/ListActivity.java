@@ -19,8 +19,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class ListActivity extends AppCompatActivity implements RecyclerItemTouch
     private List<Aplication> aplicationList;
     private CoordinatorLayout coordinatorLayout;
     private SearchView searchView;
+    private FloatingActionButton add;
     private Model model;
 
     @Override
@@ -51,6 +54,17 @@ public class ListActivity extends AppCompatActivity implements RecyclerItemTouch
         aplicationList = model.getAplications();
         adapter = new AplicationAdapter(aplicationList, this);
         coordinatorLayout = findViewById(R.id.main_content);
+        add = findViewById(R.id.add);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FormActivity.class);
+                intent.putExtra("model", model);
+                intent.putExtra("admin",true);
+                startActivityForResult(intent, 0);
+            }
+        });
 
         // white background notification bar
         whiteNotificationBar(recyclerView);
@@ -80,7 +94,7 @@ public class ListActivity extends AppCompatActivity implements RecyclerItemTouch
         if (direction == ItemTouchHelper.START) {
             if (viewHolder instanceof AplicationAdapter.MyViewHolder) {
                 // get the removed item name to display it in snack bar
-                String name = aplicationList.get(viewHolder.getAdapterPosition()).getFirst_name();
+                String name = aplicationList.get(viewHolder.getAdapterPosition()).getFirst_name() + " " + aplicationList.get(viewHolder.getAdapterPosition()).getLast_name();
 
                 // save the index deleted
                 final int deletedIndex = viewHolder.getAdapterPosition();
@@ -88,8 +102,8 @@ public class ListActivity extends AppCompatActivity implements RecyclerItemTouch
                 adapter.removeItem(viewHolder.getAdapterPosition());
 
                 // showing snack bar with Undo option
-                Snackbar snackbar = Snackbar.make(coordinatorLayout, name + " removido!", Snackbar.LENGTH_LONG);
-                snackbar.setAction("UNDO", new View.OnClickListener() {
+                Snackbar snackbar = Snackbar.make(coordinatorLayout, name + " Eliminado!", Snackbar.LENGTH_LONG);
+                snackbar.setAction("Deshacer", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // undo is selected, restore the deleted item from adapter
@@ -104,7 +118,8 @@ public class ListActivity extends AppCompatActivity implements RecyclerItemTouch
             Aplication aux = adapter.getSwipedItem(viewHolder.getAdapterPosition());
             //send data to Edit Activity
             Intent intent = new Intent(this, FormActivity.class);
-            intent.putExtra("object", aux);
+            intent.putExtra("model", model);
+            intent.putExtra("aplication", aux);
             adapter.notifyDataSetChanged(); //restart left swipe view
             startActivity(intent);
         }

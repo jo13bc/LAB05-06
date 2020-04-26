@@ -237,13 +237,12 @@
                         android:textColor="@android:color/black"
                         android:textSize="16sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
-                        android:layout_span="2"
-                        android:editable="false"/>
+                        android:layout_span="2"/>
 
                 </TableRow>
 

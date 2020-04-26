@@ -3,6 +3,7 @@ package com.miker.login;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class Model implements Serializable {
@@ -30,8 +31,8 @@ public class Model implements Serializable {
     public void generate_aplications() {
         aplications.addAll(
                 Arrays.asList(
-                        new Aplication("prueba", "1", "","","","","","","","","","",null),
-                        new Aplication("prueba", "2", "","","","","","","","","","",null)
+                        new Aplication("prueba", "1", "","","","","","","","","","",new Date()),
+                        new Aplication("prueba", "2", "","","","","","","","","","",new Date())
                 )
         );
     }
