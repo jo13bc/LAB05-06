@@ -1,4 +1,7 @@
 <resources>
+    <string name="preference_user_key">com.miker.componentes.Usuario</string>
+    <string name="preference_user_key_default">none</string>
+
     <string name="app_name">Login</string>
     <string name="title">Job aplication</string>
     <string name="subtitle">Por favor complete la información solicitada</string>
@@ -21,4 +24,18 @@
     <string name="phoneNumber_1">Phone Number</string>
     <string name="btn_send">Send</string>
     <string name="btn_file">File</string>
+    <string name="title_activity_nav_drawer_usuario">NavDrawerActivityUsuario</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Bienvenido</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="title_activity_nav_drawer_admin">NavDrawerActivityAdmin</string>
 </resources>

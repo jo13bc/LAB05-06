@@ -9,6 +9,7 @@ import java.util.List;
 public class Model implements Serializable {
     private List<Usuario> usuarios;
     private List<Aplication> aplications;
+    private Usuario loggedUser;
     public final String[] country = { "India", "USA", "China", "Japan", "Other"};
     public final String[] position = { "Ingeniera(o)", "Concerje", "Administrada(o)r", "Operaria(o)", "Secretaria(o)"};
 
@@ -61,6 +62,10 @@ public class Model implements Serializable {
                 break;
             }
         }
+        loggedUser = usuario;
         return usuario;
+    }
+    public Usuario getLoggedUser() {
+        return loggedUser;
     }
 }

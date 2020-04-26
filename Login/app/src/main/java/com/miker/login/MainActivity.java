@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         String message;
         if(usuario.isAdmin()){
-            intent = new Intent(getApplicationContext(), ListActivity.class);
+            intent = new Intent(getApplicationContext(), NavDrawerActivityAdmin.class);
             message = "Administrador";
         }else {
-            intent = new Intent(getApplicationContext(), FormActivity.class);
+            intent = new Intent(getApplicationContext(), NavDrawerActivityUsuario.class);
             message = "Usuario";
         }
         intent.putExtra("model", model);
