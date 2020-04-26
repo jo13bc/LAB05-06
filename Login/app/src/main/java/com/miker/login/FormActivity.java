@@ -85,12 +85,16 @@ public class FormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getInformation();
-                model.getAplications().add(aplication);
                 Intent intent;
                 if (getIntent().getSerializableExtra("admin") == null) {
                     intent = new Intent(getApplicationContext(), MainActivity.class);
                 } else {
                     intent = new Intent(getApplicationContext(), ListActivity.class);
+                }
+                if(aplication.getId() == -1){
+                    model.insertAplication(aplication);
+                }else{
+                    model.updateAplication(aplication);
                 }
                 intent.putExtra("model", model);
                 startActivityForResult(intent, 0);

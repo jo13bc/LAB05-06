@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Aplication implements Serializable {
+    private int id;
     private String first_name;
     private String last_name;
     private String address_1;
@@ -18,7 +19,8 @@ public class Aplication implements Serializable {
     private String posicion;
     private Date date;
 
-    public Aplication(String first_name, String last_name, String address_1, String address_2, String city, String state, String code, String country, String email, String phone_area, String phone_number, String posicion, Date date) {
+    public Aplication(int id, String first_name, String last_name, String address_1, String address_2, String city, String state, String code, String country, String email, String phone_area, String phone_number, String posicion, Date date) {
+        this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.address_1 = address_1;
@@ -35,7 +37,20 @@ public class Aplication implements Serializable {
     }
 
     public Aplication(){
-        this(null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(-1, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    }
+
+    public Aplication(int id){
+        this();
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirst_name() {
