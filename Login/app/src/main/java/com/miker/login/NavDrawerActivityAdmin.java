@@ -101,10 +101,7 @@ public class NavDrawerActivityAdmin extends AppCompatActivity
         int id = item.getItemId();
         
 
-        if (id == R.id.nav_home) {
-            intent = new Intent(NavDrawerActivityAdmin.this, NavDrawerActivityAdmin.class);
-            // Handle the camera action
-        } else if (id == R.id.nav_buscar_admin) {
+        if (id == R.id.nav_buscar_admin) {
             intent = new Intent(NavDrawerActivityAdmin.this, ListActivity.class);            
         } else if (id == R.id.nav_button_admin) {
             intent = new Intent(NavDrawerActivityAdmin.this, ListActivity.class);

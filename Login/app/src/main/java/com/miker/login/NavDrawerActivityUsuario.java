@@ -100,10 +100,7 @@ public class NavDrawerActivityUsuario extends AppCompatActivity
         }
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-           intent = new Intent(NavDrawerActivityUsuario.this, NavDrawerActivityUsuario.class);
-                 // Handle the camera action
-        } else if (id == R.id.nav_aplicar) {
+        if (id == R.id.nav_aplicar) {
             intent = new Intent(NavDrawerActivityUsuario.this, FormActivity.class);
         } else if (id == R.id.nav_button) {
             intent = new Intent(NavDrawerActivityUsuario.this, FormActivity.class);
