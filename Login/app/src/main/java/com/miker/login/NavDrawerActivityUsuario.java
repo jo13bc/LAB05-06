@@ -24,6 +24,7 @@ public class NavDrawerActivityUsuario extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferences mPrefs;
+    private Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,28 +90,29 @@ public class NavDrawerActivityUsuario extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
+        Intent intent = null;
         Gson gson = new Gson();
         String json = mPrefs.getString(getString(R.string.preference_user_key), "");
-        Model model = gson.fromJson(json, Model.class);
-        //     int privilegio = model.getLoggedUser().;
-        //    Handle navigation view item clicks here.
+        //   Model model = gson.fromJson(json, Model.class);
+        model = (Model) getIntent().getSerializableExtra("model");
+        if(model == null){
+            model = new Model();
+        }
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(NavDrawerActivityUsuario.this, NavDrawerActivityUsuario.class);
-            NavDrawerActivityUsuario.this.startActivity(intent);
-            // Handle the camera action
+           intent = new Intent(NavDrawerActivityUsuario.this, NavDrawerActivityUsuario.class);
+                 // Handle the camera action
         } else if (id == R.id.nav_aplicar) {
-            Intent intent = new Intent(NavDrawerActivityUsuario.this, FormActivity.class);
-            NavDrawerActivityUsuario.this.startActivity(intent);
+            intent = new Intent(NavDrawerActivityUsuario.this, FormActivity.class);
         } else if (id == R.id.nav_button) {
-            Intent intent = new Intent(NavDrawerActivityUsuario.this, FormActivity.class);
-            NavDrawerActivityUsuario.this.startActivity(intent);
+            intent = new Intent(NavDrawerActivityUsuario.this, FormActivity.class);
         }else if (id == R.id.nav_logout) {
             finish();
-            Intent intent = new Intent(NavDrawerActivityUsuario.this, MainActivity.class);
-            NavDrawerActivityUsuario.this.startActivity(intent);
+            intent = new Intent(NavDrawerActivityUsuario.this, MainActivity.class);
         }
+        intent.putExtra("model", model);
+        startActivityForResult(intent, 0);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
