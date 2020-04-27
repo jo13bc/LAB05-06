@@ -87,9 +87,9 @@ public class FormActivity extends AppCompatActivity {
                 getInformation();
                 Intent intent;
                 if (getIntent().getSerializableExtra("admin") == null) {
-                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent = new Intent(getApplicationContext(), NavDrawerActivityUsuario.class);
                 } else {
-                    intent = new Intent(getApplicationContext(), ListActivity.class);
+                    intent = new Intent(getApplicationContext(), NavDrawerActivityAdmin.class);
                 }
                 if(aplication.getId() == -1){
                     model.insertAplication(aplication);

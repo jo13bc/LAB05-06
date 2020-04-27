@@ -80,9 +80,7 @@ public class ListActivity extends AppCompatActivity implements RecyclerItemTouch
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         //should use database info
-
-
-        // Receive the Carrera sent by AddUpdCarreraActivity
+         // Receive the Carrera sent by AddUpdCarreraActivity
         checkIntentInformation();
 
         //refresh view
@@ -202,7 +200,11 @@ public class ListActivity extends AppCompatActivity implements RecyclerItemTouch
     public void onSelected(Aplication aplication) { //TODO get the select item of recycleView
         Toast.makeText(getApplicationContext(), "Selected: " + aplication.getFirst_name() + " " + aplication.getLast_name(), Toast.LENGTH_LONG).show();
     }
-
+    public void abrirMAct() {
+        finish();
+        Intent a = new Intent(this, NavDrawerActivityAdmin.class);
+        startActivity(a);
+    }
     private void checkIntentInformation() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
