@@ -116,6 +116,7 @@ public class ListActivity extends AppCompatActivity implements RecyclerItemTouch
             Aplication aux = adapter.getSwipedItem(viewHolder.getAdapterPosition());
             //send data to Edit Activity
             Intent intent = new Intent(this, FormActivity.class);
+            intent.putExtra("admin",true);
             intent.putExtra("model", model);
             intent.putExtra("aplication", aux);
             adapter.notifyDataSetChanged(); //restart left swipe view
