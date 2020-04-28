@@ -10,13 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".NavDrawerActivityAdmin"
+            android:name=".NavDrawerActivity"
             android:label="Administrador"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".NavDrawerActivityUsuario"
-            android:label="Usuario"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
