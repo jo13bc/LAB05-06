@@ -182,7 +182,7 @@ public class ListActivity extends AppCompatActivity implements RecyclerItemTouch
             searchView.setIconified(true);
             return;
         }
-        Intent a = new Intent(this, MainActivity.class);
+        Intent a = new Intent(this, NavDrawerActivityAdmin.class);
         a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(a);
         super.onBackPressed();
