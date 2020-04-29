@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
     <RelativeLayout
         android:id="@+id/view_background_edit"
         android:layout_width="match_parent"
@@ -63,7 +64,7 @@
         android:id="@+id/view_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:background="@drawable/fondo6">
 
         <TextView
             android:id="@+id/first_name"
@@ -79,6 +80,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@string/last_name"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/email"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/posicion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:text="@string/posicion"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
     </RelativeLayout>
