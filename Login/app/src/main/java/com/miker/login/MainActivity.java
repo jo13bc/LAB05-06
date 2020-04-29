@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // initiate a button
-        Button loginButton = (Button) findViewById(R.id.btn);
+        ImageButton loginButton =  (ImageButton ) findViewById(R.id.btn);
         user = (EditText) findViewById(R.id.user);
         password = (EditText) findViewById(R.id.password);
         usuario = new Usuario();

@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".NavDrawerActivity"
-            android:label="Administrador"
+            android:label="Inicio"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
