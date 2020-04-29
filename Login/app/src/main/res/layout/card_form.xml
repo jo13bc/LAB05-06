@@ -83,19 +83,19 @@
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
         <TextView
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="@string/email"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
-        <TextView
             android:id="@+id/posicion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="60dp"
             android:text="@string/posicion"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:text="@string/email"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
     </RelativeLayout>
