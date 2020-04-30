@@ -23,7 +23,7 @@ public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferences mPrefs;
-    private Model model = (Model) getIntent().getSerializableExtra("model");
+    private Model model;
     Usuario usuario;
     NavigationView navigationView;
 
@@ -55,12 +55,17 @@ public class NavDrawerActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        model = (Model) getIntent().getSerializableExtra("model");
         usuario = model.getLoggedUser();
         Menu menu = navigationView.getMenu();
-        if(usuario.isAdmin()) {
+
+        if(!usuario.isAdmin()){
             menu.findItem(R.id.nav_buscar).setVisible(false);
         }
-      }
+        if(usuario.isAdmin()){
+            menu.findItem(R.id.nav_aplicar).setVisible(false);
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -107,7 +112,7 @@ public class NavDrawerActivity extends AppCompatActivity
         usuario = model.getLoggedUser();
 
         if(usuario.isAdmin()){
-                        if (id == R.id.nav_buscar) {
+            if (id == R.id.nav_buscar) {
                 intent = new Intent(NavDrawerActivity.this, ListActivity.class);
             } else  if (id == R.id.nav_logout) {
                 finish();
