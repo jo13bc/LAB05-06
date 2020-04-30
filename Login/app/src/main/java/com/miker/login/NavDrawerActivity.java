@@ -23,8 +23,9 @@ public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferences mPrefs;
-    private Model model;
+    private Model model = (Model) getIntent().getSerializableExtra("model");
     Usuario usuario;
+    NavigationView navigationView;
 
 
     @Override
@@ -51,9 +52,15 @@ public class NavDrawerActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
+
+        usuario = model.getLoggedUser();
+        Menu menu = navigationView.getMenu();
+        if(usuario.isAdmin()) {
+            menu.findItem(R.id.nav_buscar).setVisible(false);
+        }
+      }
 
     @Override
     public void onBackPressed() {
@@ -90,12 +97,9 @@ public class NavDrawerActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         Intent  intent = null;
         Gson gson = new Gson();
         String json = mPrefs.getString(getString(R.string.preference_user_key), "");
-        //Model model = gson.fromJson(json, Model.class);
-        model = (Model) getIntent().getSerializableExtra("model");
         if(model == null){
             model = new Model();
         }
@@ -103,11 +107,13 @@ public class NavDrawerActivity extends AppCompatActivity
         usuario = model.getLoggedUser();
 
         if(usuario.isAdmin()){
-            if (id == R.id.nav_buscar) {
+                        if (id == R.id.nav_buscar) {
                 intent = new Intent(NavDrawerActivity.this, ListActivity.class);
             } else  if (id == R.id.nav_logout) {
                 finish();
                 intent = new Intent(NavDrawerActivity.this, MainActivity.class);
+            }else   if (id == R.id.nav_aplicar) {
+                intent = new Intent(NavDrawerActivity.this, FormActivity.class);
             }
         }else{
             if (id == R.id.nav_aplicar) {
