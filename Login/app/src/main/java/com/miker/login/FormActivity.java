@@ -142,18 +142,31 @@ public class FormActivity extends AppCompatActivity {
 
     private void setInformation() {
         first_name.setText(aplication.getFirst_name());
+        first_name.setEnabled(false);
         last_name.setText(aplication.getLast_name());
+        last_name.setEnabled(false);
         address_1.setText(aplication.getAddress_1());
+        address_1.setEnabled(false);
         address_2.setText(aplication.getAddress_2());
+        address_2.setEnabled(false);
         city.setText(aplication.getCity());
+        city.setEnabled(false);
         state.setText(aplication.getState());
+        state.setEnabled(false);
         code.setText(aplication.getCode());
+        code.setEnabled(false);
         setSelected(country, model.country, aplication.getCountry());
+        country.setEnabled(false);
         email.setText(aplication.getEmail());
+        email.setEnabled(false);
         phone_area.setText(aplication.getPhone_area());
+        phone_area.setEnabled(false);
         phone_number.setText(aplication.getPhone_number());
+        phone_number.setEnabled(false);
         setSelected(posicion, model.position, aplication.getPosicion());
+        posicion.setEnabled(false);
         date.setText(aplication.getDate().toString());
+        date.setEnabled(false);
     }
 
     private void setSelected(Spinner spinner, String[] options, String option) {
