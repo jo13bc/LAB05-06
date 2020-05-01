@@ -26,13 +26,15 @@ public class AplicationAdapter extends RecyclerView.Adapter<AplicationAdapter.My
     private Aplication object;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView first_name, last_name;
+        public TextView first_name, last_name, posicion, email;
         public RelativeLayout viewForeground, viewBackgroundDelete, viewBackgroundEdit;
 
         public MyViewHolder(View view) {
             super(view);
             first_name = (TextView) view.findViewById(R.id.first_name);
             last_name = (TextView) view.findViewById(R.id.last_name);
+            posicion = (TextView) view.findViewById(R.id.posicion);
+            email = (TextView) view.findViewById(R.id.email);
             viewBackgroundDelete = view.findViewById(R.id.view_background_delete);
             viewBackgroundEdit = view.findViewById(R.id.view_background_edit);
             viewForeground = view.findViewById(R.id.view_foreground);
@@ -65,6 +67,8 @@ public class AplicationAdapter extends RecyclerView.Adapter<AplicationAdapter.My
         final Aplication aplication = aplicationListFiltered.get(position);
         holder.first_name.setText(aplication.getFirst_name());
         holder.last_name.setText(aplication.getLast_name());
+        holder.email.setText(aplication.getEmail());
+        holder.posicion.setText(aplication.getPosicion());
     }
 
     @Override

@@ -35,4 +35,4 @@
         app:backgroundTint="@color/primaryColor"
         app:srcCompat="@drawable/ic_add_circle_black_24dp" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+   </androidx.coordinatorlayout.widget.CoordinatorLayout>

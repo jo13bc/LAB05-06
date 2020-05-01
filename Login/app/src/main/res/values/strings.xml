@@ -8,6 +8,8 @@
     <string name="eFullName">Full name:</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="email">Correo Electronico</string>
+    <string name="posicion">Puesto</string>
     <string name="eCurrentAddress">Current Address</string>
     <string name="streetAddress">Street Address</string>
     <string name="streetAddres_2">Street line 2</string>

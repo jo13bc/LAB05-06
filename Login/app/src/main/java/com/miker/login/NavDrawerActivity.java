@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,22 +19,25 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
-public class NavDrawerActivityAdmin extends AppCompatActivity
+public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SharedPreferences mPrefs;
     private Model model;
+    Usuario usuario;
+    NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nav_drawer_admin);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_admin);
+        setContentView(R.layout.activity_nav_drawer);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mPrefs = this.getSharedPreferences(getString(R.string.preference_user_key), Context.MODE_PRIVATE);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_admin);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,19 +46,30 @@ public class NavDrawerActivityAdmin extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_admin);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_admin);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        model = (Model) getIntent().getSerializableExtra("model");
+        usuario = model.getLoggedUser();
+        Menu menu = navigationView.getMenu();
+
+        if(!usuario.isAdmin()){
+            menu.findItem(R.id.nav_buscar).setVisible(false);
+        }
+        if(usuario.isAdmin()){
+            menu.findItem(R.id.nav_aplicar).setVisible(false);
+        }
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_admin);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -67,7 +80,7 @@ public class NavDrawerActivityAdmin extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.nav_drawer_activity_admin, menu);
+        getMenuInflater().inflate(R.menu.nav_drawer_activity, menu);
         return true;
     }
 
@@ -79,7 +92,7 @@ public class NavDrawerActivityAdmin extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings_admin) {
+        if (id == R.id.action_settings) {
             return true;
         }
 
@@ -89,30 +102,36 @@ public class NavDrawerActivityAdmin extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         Intent  intent = null;
         Gson gson = new Gson();
         String json = mPrefs.getString(getString(R.string.preference_user_key), "");
-        //Model model = gson.fromJson(json, Model.class);
-        model = (Model) getIntent().getSerializableExtra("model");
         if(model == null){
             model = new Model();
         }
         int id = item.getItemId();
-        
+        usuario = model.getLoggedUser();
 
-        if (id == R.id.nav_buscar_admin) {
-            intent = new Intent(NavDrawerActivityAdmin.this, ListActivity.class);            
-        } else if (id == R.id.nav_button_admin) {
-            intent = new Intent(NavDrawerActivityAdmin.this, ListActivity.class);
-        }  else if (id == R.id.nav_logout_admin) {
-            finish();
-            intent = new Intent(NavDrawerActivityAdmin.this, MainActivity.class);
+        if(usuario.isAdmin()){
+            if (id == R.id.nav_buscar) {
+                intent = new Intent(NavDrawerActivity.this, ListActivity.class);
+            } else  if (id == R.id.nav_logout) {
+                finish();
+                intent = new Intent(NavDrawerActivity.this, MainActivity.class);
+            }else   if (id == R.id.nav_aplicar) {
+                intent = new Intent(NavDrawerActivity.this, FormActivity.class);
+            }
+        }else{
+            if (id == R.id.nav_aplicar) {
+                intent = new Intent(NavDrawerActivity.this, FormActivity.class);
+            } else if (id == R.id.nav_logout) {
+                finish();
+                intent = new Intent(NavDrawerActivity.this, MainActivity.class);
+            }
         }
         intent.putExtra("model", model);
         startActivityForResult(intent, 0);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_admin);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
