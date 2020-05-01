@@ -40,4 +40,9 @@
 
     <string name="home_second">Home Second</string>
     <string name="title_activity_nav_drawer_admin">NavDrawerActivityAdmin</string>
+    <string name="user">User</string>
+    <string name="password">Passwrod</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="user_information">User information</string>
 </resources>

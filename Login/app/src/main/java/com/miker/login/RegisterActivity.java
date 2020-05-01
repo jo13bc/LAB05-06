@@ -10,13 +10,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class FormActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     private static final String ARG_REGISTRO_ID = "arg_lawyer_id";
     private static final String CERO = "0";
     private static final String BARRA = "/";
@@ -31,41 +32,29 @@ public class FormActivity extends AppCompatActivity {
 
     private EditText first_name;
     private EditText last_name;
-    private EditText address_1;
-    private EditText address_2;
-    private EditText city;
-    private EditText state;
-    private EditText code;
-    private Spinner country;
     private EditText email;
-    private EditText phone_area;
-    private EditText phone_number;
-    private Spinner posicion;
     private TextView date;
+    private EditText user;
+    private EditText password;
+    private EditText confirmation;
     private ImageButton button;
-    private Aplication aplication;
+    private Usuario usuario;
     private Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form);
+        setContentView(R.layout.activity_register);
         // initiate a button
         model = (Model) getIntent().getSerializableExtra("model");
         button = (ImageButton) findViewById(R.id.btn);
         first_name = (EditText) findViewById(R.id.first_name);
         last_name = (EditText) findViewById(R.id.last_name);
-        address_1 = (EditText) findViewById(R.id.address_1);
-        address_2 = (EditText) findViewById(R.id.address_2);
-        city = (EditText) findViewById(R.id.city);
-        state = (EditText) findViewById(R.id.state);
-        code = (EditText) findViewById(R.id.code);
-        country = (Spinner) findViewById(R.id.country);
         email = (EditText) findViewById(R.id.email);
-        phone_area = (EditText) findViewById(R.id.phone_area);
-        phone_number = (EditText) findViewById(R.id.phone_number);
-        posicion = (Spinner) findViewById(R.id.position);
         date = (TextView) findViewById(R.id.date);
+        user = (EditText) findViewById(R.id.user);
+        password = (EditText) findViewById(R.id.password);
+        confirmation = (EditText) findViewById(R.id.confirmation);
         // perform click event on the button
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,26 +66,28 @@ public class FormActivity extends AppCompatActivity {
                 }
             }
         });
-        posicion.setAdapter(new ArrayAdapter(this, android.R.layout.simple_spinner_item, model.position));
-        country.setAdapter(new ArrayAdapter(this, android.R.layout.simple_spinner_item, model.country));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getInformation();
-                Intent intent = new Intent(getApplicationContext(), NavDrawerActivity.class);
+                try {
+                    getInformation();
+                    Intent intent = new Intent(getApplicationContext(), NavDrawerActivity.class);
 
-                if(aplication.getId() == -1){
-                    model.insertAplication(aplication);
-                }else{
-                    model.updateAplication(aplication);
+                    if (usuario.getPersona().getId() == -1) {
+                        model.insertUser(usuario, confirmation.getText().toString());
+                    } else {
+                        model.updateUser(usuario, confirmation.getText().toString());
+                    }
+                    intent.putExtra("model", model);
+                    startActivityForResult(intent, 0);
+                }catch (Exception ex){
+                    Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
-                intent.putExtra("model", model);
-                startActivityForResult(intent, 0);
             }
         });
-        aplication = (Aplication) getIntent().getSerializableExtra("aplication");
-        if (aplication == null) {
-            aplication = new Aplication();
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+        if (usuario == null) {
+            usuario = new Usuario();
         } else {
             setInformation();
         }
@@ -125,48 +116,28 @@ public class FormActivity extends AppCompatActivity {
     }
 
     private void getInformation() {
-        aplication.setFirst_name(first_name.getText().toString());
-        aplication.setLast_name(last_name.getText().toString());
-        aplication.setAddress_1(address_1.getText().toString());
-        aplication.setAddress_2(address_2.getText().toString());
-        aplication.setCity(city.getText().toString());
-        aplication.setState(state.getText().toString());
-        aplication.setCode(code.getText().toString());
-        aplication.setCountry(country.getSelectedItem().toString());
-        aplication.setEmail(email.getText().toString());
-        aplication.setPhone_area(phone_area.getText().toString());
-        aplication.setPhone_number(phone_number.getText().toString());
-        aplication.setPosicion(posicion.getSelectedItem().toString());
-        aplication.setDate(new Date(date.getText().toString()));
+        usuario.getPersona().setFirst_name(first_name.getText().toString());
+        usuario.getPersona().setLast_name(last_name.getText().toString());
+        usuario.getPersona().setEmail(email.getText().toString());
+        usuario.getPersona().setDate(new Date(date.getText().toString()));
+        usuario.setUser(user.getText().toString());
+        usuario.setPassword(password.getText().toString());
     }
 
     private void setInformation() {
-        first_name.setText(aplication.getFirst_name());
+        first_name.setText(usuario.getPersona().getFirst_name());
         first_name.setEnabled(false);
-        last_name.setText(aplication.getLast_name());
+        last_name.setText(usuario.getPersona().getLast_name());
         last_name.setEnabled(false);
-        address_1.setText(aplication.getAddress_1());
-        address_1.setEnabled(false);
-        address_2.setText(aplication.getAddress_2());
-        address_2.setEnabled(false);
-        city.setText(aplication.getCity());
-        city.setEnabled(false);
-        state.setText(aplication.getState());
-        state.setEnabled(false);
-        code.setText(aplication.getCode());
-        code.setEnabled(false);
-        setSelected(country, model.country, aplication.getCountry());
-        country.setEnabled(false);
-        email.setText(aplication.getEmail());
+        email.setText(usuario.getPersona().getEmail());
         email.setEnabled(false);
-        phone_area.setText(aplication.getPhone_area());
-        phone_area.setEnabled(false);
-        phone_number.setText(aplication.getPhone_number());
-        phone_number.setEnabled(false);
-        setSelected(posicion, model.position, aplication.getPosicion());
-        posicion.setEnabled(false);
-        date.setText(aplication.getDate().toString());
+        date.setText(usuario.getPersona().getDate().toString());
         date.setEnabled(false);
+        user.setText(usuario.getUser());
+        user.setEnabled(false);
+        password.setText(usuario.getPassword());
+        password.setEnabled(false);
+        confirmation.setEnabled(false);
     }
 
     private void setSelected(Spinner spinner, String[] options, String option) {

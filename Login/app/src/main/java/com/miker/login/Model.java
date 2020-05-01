@@ -1,5 +1,7 @@
 package com.miker.login;
 
+import com.miker.login.ui.Persona;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +25,7 @@ public class Model implements Serializable {
     public void generate_users() {
         usuarios.addAll(
                 Arrays.asList(
-                        new Usuario("admin", "admin", true),
+                        new Usuario("admin", "admin", new Persona(1,"admin","","admin@prueba.com",new Date()), true),
                         new Usuario("1234", "1234")
                 )
         );
@@ -71,6 +73,31 @@ public class Model implements Serializable {
                 a.setPhone_number(aplication.getPhone_number());
                 a.setPosicion(aplication.getPosicion());
                 a.setDate(aplication.getDate());
+                break;
+            }
+        }
+    }
+
+    public void insertUser(Usuario usuario, String confirmation) throws Exception{
+        if(!usuario.getPassword().equals(confirmation)){
+            throw new Exception("¡Las contraseñas no coinciden!");
+        }
+        usuario.getPersona().setId(usuarios.size()+1);
+        usuarios.add(usuario);
+    }
+
+    public void updateUser(Usuario usuario, String confirmation) throws Exception{
+        if(!usuario.getPassword().equals(confirmation)){
+            throw new Exception("¡Las contraseñas no coinciden!");
+        }
+        for(Usuario u : usuarios){
+            if(u.getPersona().getId() == usuario.getPersona().getId()){
+                u.getPersona().setFirst_name(usuario.getPersona().getFirst_name());
+                u.getPersona().setLast_name(usuario.getPersona().getLast_name());
+                u.getPersona().setEmail(usuario.getPersona().getEmail());
+                u.getPersona().setDate(usuario.getPersona().getDate());
+                u.setUser(usuario.getPersona().getLast_name());
+                u.setPassword(usuario.getPersona().getEmail());
                 break;
             }
         }
