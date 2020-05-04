@@ -82,16 +82,18 @@ public class FormActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getInformation();
-                Intent intent = new Intent(getApplicationContext(), NavDrawerActivity.class);
+                if (validate()) {
+                    getInformation();
+                    Intent intent = new Intent(getApplicationContext(), NavDrawerActivity.class);
 
-                if(aplication.getId() == -1){
-                    model.insertAplication(aplication);
-                }else{
-                    model.updateAplication(aplication);
+                    if (aplication.getId() == -1) {
+                        model.insertAplication(aplication);
+                    } else {
+                        model.updateAplication(aplication);
+                    }
+                    intent.putExtra("model", model);
+                    startActivityForResult(intent, 0);
                 }
-                intent.putExtra("model", model);
-                startActivityForResult(intent, 0);
             }
         });
         aplication = (Aplication) getIntent().getSerializableExtra("aplication");
@@ -183,8 +185,58 @@ public class FormActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent a = new Intent(this, NavDrawerActivity.class);
+        a.putExtra("model", model);
         a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(a);
         super.onBackPressed();
+    }
+
+    private boolean validate() {
+        boolean result = true;
+        if (first_name.getText().toString().isEmpty()) {
+            first_name.setError("First name can't be empty");
+            result = false;
+        }
+        if (last_name.getText().toString().isEmpty()) {
+            last_name.setError("Last name can't be empty");
+            result = false;
+        }
+        if (address_1.getText().toString().isEmpty()) {
+            address_1.setError("First adress line can't be empty");
+            result = false;
+        }
+        if (address_2.getText().toString().isEmpty()) {
+            address_2.setError("Second address line can't be empty");
+            result = false;
+        }
+        if (city.getText().toString().isEmpty()) {
+            city.setError("City can't be empty");
+            result = false;
+        }
+        if (state.getText().toString().isEmpty()) {
+            state.setError("State can't be empty");
+            result = false;
+        }
+        if (code.getText().toString().isEmpty()) {
+            code.setError("Portal/Zip code can't be empty");
+            result = false;
+        }
+        if (email.getText().toString().isEmpty()) {
+            email.setError("Email can't be empty");
+            result = false;
+        }
+        if (phone_area.getText().toString().isEmpty()) {
+            phone_area.setError("Phone area can't be empty");
+            result = false;
+        }
+        if (phone_number.getText().toString().isEmpty()) {
+            phone_number.setError("Phone number can't be empty");
+            result = false;
+        }
+        if (date.getText().toString().isEmpty()) {
+            date.setError("Date can't be empty");
+            result = false;
+        }
+        return result;
     }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,12 +31,25 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Usuario usuario = model.login(user.getText().toString(), password.getText().toString());
-                if (usuario != null) {
-                    openActivity(usuario);
-                } else {
-                    Toast.makeText(getApplicationContext(), "¡Datos incorrectos!", Toast.LENGTH_LONG).show();  // display a toast message
+                try {
+                    Usuario usuario = model.login(user.getText().toString(), password.getText().toString());
+                    if (usuario != null) {
+                        openActivity(usuario);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "¡Datos incorrectos!", Toast.LENGTH_LONG).show();  // display a toast message
+                    }
+                }catch (Exception ex){
+                    Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        TextView registerButton = findViewById(R.id.texto_registrarse);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                intent.putExtra("model", model);
+                startActivityForResult(intent, 0);
             }
         });
         model = (Model) getIntent().getSerializableExtra("model");

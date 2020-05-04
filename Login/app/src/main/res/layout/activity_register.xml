@@ -182,10 +182,10 @@
 
                     <EditText
                         android:id="@+id/password"
-                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:background="#fff"
-                        android:inputType="text"
+                        android:inputType="textPassword"
                         android:padding="5dp"
                         android:textColor="#000" />
                 </TableRow>
@@ -203,10 +203,10 @@
 
                     <EditText
                         android:id="@+id/confirmation"
-                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:background="#fff"
-                        android:inputType="text"
+                        android:inputType="textPassword"
                         android:padding="5dp"
                         android:textColor="#000" />
                 </TableRow>

@@ -1,8 +1,9 @@
 package com.miker.login.ui;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Persona {
+public class Persona implements Serializable {
     private int id;
     private String first_name;
     private String last_name;
@@ -64,6 +65,10 @@ public class Persona {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getFull_name(){
+        return first_name + ' ' + last_name;
     }
 
     @Override

@@ -70,16 +70,18 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    getInformation();
-                    Intent intent = new Intent(getApplicationContext(), NavDrawerActivity.class);
+                    if(validate()) {
+                        getInformation();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
-                    if (usuario.getPersona().getId() == -1) {
-                        model.insertUser(usuario, confirmation.getText().toString());
-                    } else {
-                        model.updateUser(usuario, confirmation.getText().toString());
+                        if (usuario.getPersona().getId() == -1) {
+                            model.insertUser(usuario, confirmation.getText().toString());
+                        } else {
+                            model.updateUser(usuario, confirmation.getText().toString());
+                        }
+                        intent.putExtra("model", model);
+                        startActivityForResult(intent, 0);
                     }
-                    intent.putExtra("model", model);
-                    startActivityForResult(intent, 0);
                 }catch (Exception ex){
                     Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -154,8 +156,42 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent a = new Intent(this, NavDrawerActivity.class);
+        a.putExtra("model", model);
         a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(a);
         super.onBackPressed();
+    }
+
+    private boolean validate() {
+        boolean result = true;
+        if (first_name.getText().toString().isEmpty()) {
+            first_name.setError("The first name can't be empty");
+            result = false;
+        }
+        if (last_name.getText().toString().isEmpty()) {
+            last_name.setError("The last name can't be empty");
+            result = false;
+        }
+        if (email.getText().toString().isEmpty()) {
+            email.setError("The email can't be empty");
+            result = false;
+        }
+        if (date.getText().toString().isEmpty()) {
+            date.setError("The date can't be empty");
+            result = false;
+        }
+        if (user.getText().toString().isEmpty()) {
+            user.setError("The user can't be empty");
+            result = false;
+        }
+        if (password.getText().toString().isEmpty()) {
+            password.setError("The password can't be empty");
+            result = false;
+        }
+        if (confirmation.getText().toString().isEmpty()) {
+            confirmation.setError("The confirmation can't be empty");
+            result = false;
+        }
+        return result;
     }
 }

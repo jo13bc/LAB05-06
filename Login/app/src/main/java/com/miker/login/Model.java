@@ -6,60 +6,50 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Model implements Serializable {
-    private List<Usuario> usuarios;
+    private Map<String, Usuario> usuarios;
     private List<Aplication> aplications;
     private Usuario loggedUser;
-    public final String[] country = { "India", "USA", "China", "Japan", "Other"};
-    public final String[] position = { "Ingeniera(o)", "Concerje", "Administrada(o)r", "Operaria(o)", "Secretaria(o)"};
+    public final String[] country = {"India", "USA", "China", "Japan", "Other"};
+    public final String[] position = {"Ingeniera(o)", "Concerje", "Administrada(o)r", "Operaria(o)", "Secretaria(o)"};
 
     public Model() {
-        this.usuarios = new ArrayList<>();
+        this.usuarios = new HashMap<>();
         this.aplications = new ArrayList<>();
         this.generate_users();
         this.generate_aplications();
     }
 
     public void generate_users() {
-        usuarios.addAll(
-                Arrays.asList(
-                        new Usuario("admin", "admin", new Persona(1,"admin","","admin@prueba.com",new Date()), true),
-                        new Usuario("1234", "1234")
-                )
-        );
+        usuarios.put("1234", new Usuario("1234", "1234"));
+        usuarios.put("admin", new Usuario("admin", "admin", new Persona(1, "admin", "", "admin@prueba.com", new Date()), true));
     }
 
     public void generate_aplications() {
         aplications.addAll(
                 Arrays.asList(
-                        new Aplication(1, "prueba", "1", "","","","","","","","","","",new Date()),
-                        new Aplication(2, "prueba", "2", "","","","","","","","","","",new Date())
+                        new Aplication(1, "prueba", "1", "", "", "", "", "", "", "", "", "", "", new Date()),
+                        new Aplication(2, "prueba", "2", "", "", "", "", "", "", "", "", "", "", new Date())
                 )
         );
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
     }
 
     public List<Aplication> getAplications() {
         return aplications;
     }
 
-    public void insertAplication(Aplication aplication){
-        aplication.setId(aplications.size()+1);
+    public void insertAplication(Aplication aplication) {
+        aplication.setId(aplications.size() + 1);
         aplications.add(aplication);
     }
 
-    public void updateAplication(Aplication aplication){
-        for(Aplication a : aplications){
-            if(a.getId() == aplication.getId()){
+    public void updateAplication(Aplication aplication) {
+        for (Aplication a : aplications) {
+            if (a.getId() == aplication.getId()) {
                 a.setFirst_name(aplication.getFirst_name());
                 a.setLast_name(aplication.getLast_name());
                 a.setAddress_1(aplication.getAddress_1());
@@ -78,46 +68,50 @@ public class Model implements Serializable {
         }
     }
 
-    public void insertUser(Usuario usuario, String confirmation) throws Exception{
-        if(!usuario.getPassword().equals(confirmation)){
+    public void insertUser(Usuario usuario, String confirmation) throws Exception {
+        if (!usuario.getPassword().equals(confirmation)) {
             throw new Exception("¡Las contraseñas no coinciden!");
         }
-        usuario.getPersona().setId(usuarios.size()+1);
-        usuarios.add(usuario);
+        if (usuarios.containsKey(usuario.getUser())) {
+            throw new Exception("¡Ya existe este usuario registrado!");
+        }
+        usuario.getPersona().setId(usuarios.size() + 1);
+        usuarios.put(usuario.getUser(), usuario);
     }
 
-    public void updateUser(Usuario usuario, String confirmation) throws Exception{
-        if(!usuario.getPassword().equals(confirmation)){
+    public void updateUser(Usuario usuario, String confirmation) throws Exception {
+        if (!usuario.getPassword().equals(confirmation)) {
             throw new Exception("¡Las contraseñas no coinciden!");
         }
-        for(Usuario u : usuarios){
-            if(u.getPersona().getId() == usuario.getPersona().getId()){
-                u.getPersona().setFirst_name(usuario.getPersona().getFirst_name());
-                u.getPersona().setLast_name(usuario.getPersona().getLast_name());
-                u.getPersona().setEmail(usuario.getPersona().getEmail());
-                u.getPersona().setDate(usuario.getPersona().getDate());
-                u.setUser(usuario.getPersona().getLast_name());
-                u.setPassword(usuario.getPersona().getEmail());
-                break;
-            }
+        if (!usuarios.containsKey(usuario.getUser())) {
+            throw new Exception("¡No existe ningun registro con este usuario!");
         }
+        Usuario u = usuarios.get(usuario.getUser());
+        u.getPersona().setFirst_name(usuario.getPersona().getFirst_name());
+        u.getPersona().setLast_name(usuario.getPersona().getLast_name());
+        u.getPersona().setEmail(usuario.getPersona().getEmail());
+        u.getPersona().setDate(usuario.getPersona().getDate());
+        u.setUser(usuario.getPersona().getLast_name());
+        u.setPassword(usuario.getPersona().getEmail());
     }
 
     public void setAplications(List<Aplication> aplications) {
         this.aplications = aplications;
     }
 
-    public Usuario login(String user, String password) {
+    public Usuario login(String user, String password) throws Exception {
         Usuario usuario = null;
-        for (Usuario x : usuarios) {
-            if (x.getUser().equals(user) && x.getPassword().equals(password)) {
-                usuario = x;
-                break;
-            }
+        if (!usuarios.containsKey(user)) {
+            throw new Exception("¡No existe ningun registro con este usuario!");
         }
-        loggedUser = usuario;
+        Usuario x = usuarios.get(user);
+        if (x.getPassword().equals(password)) {
+            usuario = x;
+            loggedUser = x;
+        }
         return usuario;
     }
+
     public Usuario getLoggedUser() {
         return loggedUser;
     }

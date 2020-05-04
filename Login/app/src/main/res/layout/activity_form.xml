@@ -56,7 +56,7 @@
 
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <TextView
                         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                         android:textColor="#000" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <TextView
                         android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                         android:textColor="#000" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <EditText
                         android:id="@+id/address_2"
@@ -120,7 +120,7 @@
                         android:textColor="#000" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <EditText
                         android:id="@+id/city"
@@ -143,7 +143,7 @@
                         android:textColor="#000" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <EditText
                         android:id="@+id/code"
@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <TextView
                         android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                         android:textColor="#000" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <TextView
                         android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
                         android:textColor="#000" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <TextView
                         android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
 
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <TextView
                         android:layout_height="wrap_content"
@@ -248,7 +248,7 @@
 
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/row_space">
+                <TableRow android:layout_marginTop="@dimen/row_space_form">
 
                     <TextView
                         android:layout_height="wrap_content"
