@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -137,6 +138,9 @@ public class NavDrawerActivity extends AppCompatActivity
                 finish();
                 intent = new Intent(NavDrawerActivity.this, MainActivity.class);
             }
+        }
+        if(id == R.id.nav_buttons){
+            intent = new Intent(NavDrawerActivity.this, Buttons.class);
         }
         intent.putExtra("model", model);
         startActivityForResult(intent, 0);
