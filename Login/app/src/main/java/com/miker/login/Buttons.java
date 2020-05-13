@@ -1,6 +1,7 @@
 package com.miker.login;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -9,6 +10,9 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,12 +26,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 public class Buttons extends AppCompatActivity {
 
+    boolean click = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +46,36 @@ public class Buttons extends AppCompatActivity {
         Switch a_switch = findViewById(R.id.a_switch);
         FloatingActionButton floating_button = findViewById(R.id.floating_button);
 
+               ImageButton image_button = findViewById(R.id.imageButton);
+               Button button = findViewById(R.id.button);
+               CheckBox checkBox = findViewById(R.id.checkBox);
         //Eventos
+
+       image_button.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                  @Override
+                  public void onFocusChange (View v, boolean hasFocus){
+                     Intent intent = null;
+                    intent = new Intent(Buttons.this, FormActivity.class);
+               }
+       });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Diste click en el button", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        checkBox.setOnLongClickListener(new View.OnLongClickListener() {
+
+            public boolean  onLongClick(View v){
+                click = true;
+                return click;
+            }
+        });
+
+        //-----------------------------------------------------------------
         radio_button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

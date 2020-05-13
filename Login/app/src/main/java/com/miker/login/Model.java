@@ -26,6 +26,7 @@ public class Model implements Serializable {
 
     public void generate_users() {
         usuarios.put("1234", new Usuario("1234", "1234"));
+        usuarios.put("user", new Usuario("user", "user", new Persona(2, null, null, null, new Date()), false));
         usuarios.put("admin", new Usuario("admin", "admin", new Persona(1, "admin", "", "admin@prueba.com", new Date()), true));
     }
 
@@ -33,7 +34,7 @@ public class Model implements Serializable {
         aplications.addAll(
                 Arrays.asList(
                         new Aplication(1, "prueba", "1", "", "", "", "", "", "", "", "", "", "", new Date()),
-                        new Aplication(2, "prueba", "2", "", "", "", "", "", "", "", "", "", "", new Date())
+                        new Aplication(2,  "prueba", "2", "", "", "", "", "", "", "", "", "", "", new Date())
                 )
         );
     }
