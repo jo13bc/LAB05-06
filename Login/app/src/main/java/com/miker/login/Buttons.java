@@ -49,8 +49,9 @@ public class Buttons extends AppCompatActivity {
         ImageButton image_button = findViewById(R.id.imageButton);
         Button button = findViewById(R.id.button);
         CheckBox checkBox = findViewById(R.id.checkBox);
-        ChipGroup chip_group = findViewById(R.id.chip_group);
-        Chip chip = findViewById(R.id.chip2);
+        ChipGroup chip_group = findViewById(R.id.chip_grupp);
+        Chip chip = findViewById(R.id.chip);
+        Chip chip2 = findViewById(R.id.chip2);
 
         //Eventos
 
