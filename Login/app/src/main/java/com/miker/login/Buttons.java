@@ -27,6 +27,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -45,10 +46,12 @@ public class Buttons extends AppCompatActivity {
         ToggleButton toggle_button = findViewById(R.id.toggle_button);
         Switch a_switch = findViewById(R.id.a_switch);
         FloatingActionButton floating_button = findViewById(R.id.floating_button);
+        ImageButton image_button = findViewById(R.id.imageButton);
+        Button button = findViewById(R.id.button);
+        CheckBox checkBox = findViewById(R.id.checkBox);
+        ChipGroup chip_group = findViewById(R.id.chip_group);
+        Chip chip = findViewById(R.id.chip2);
 
-               ImageButton image_button = findViewById(R.id.imageButton);
-               Button button = findViewById(R.id.button);
-               CheckBox checkBox = findViewById(R.id.checkBox);
         //Eventos
 
        image_button.setOnFocusChangeListener(new View.OnFocusChangeListener() {

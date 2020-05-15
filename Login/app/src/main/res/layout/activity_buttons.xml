@@ -73,6 +73,21 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/log" />
 
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="54dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.chip.ChipGroup>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
