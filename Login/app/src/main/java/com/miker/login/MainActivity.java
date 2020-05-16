@@ -43,11 +43,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        TextView registerButton = findViewById(R.id.texto_registrarse);
+       TextView registerButton = findViewById(R.id.texto_registrarse);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                intent.putExtra("model", model);
+                startActivityForResult(intent, 0);
+            }
+        });
+        TextView passwordButton = findViewById(R.id.texto_olvidaste_contrasena);
+        passwordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PasswordActivity.class);
                 intent.putExtra("model", model);
                 startActivityForResult(intent, 0);
             }

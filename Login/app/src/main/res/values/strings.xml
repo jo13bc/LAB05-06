@@ -9,6 +9,9 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="email">Correo Electronico</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="posicion">Puesto</string>
     <string name="eCurrentAddress">Current Address</string>
     <string name="streetAddress">Street Address</string>
@@ -43,6 +46,7 @@
     <string name="user">User</string>
     <string name="password">Passwrod</string>
     <string name="personal_information">Personal Information</string>
+    <string name="personal_information_password">Change Password</string>
     <string name="confirmation">Confirmation</string>
     <string name="user_information">User information</string>
 </resources>
