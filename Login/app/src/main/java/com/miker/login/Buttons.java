@@ -51,19 +51,18 @@ public class Buttons extends AppCompatActivity {
         CheckBox checkBox = findViewById(R.id.checkBox);
         ChipGroup chip_group = findViewById(R.id.chip_grupp);
         Chip chip = findViewById(R.id.chip);
-        Chip chip2 = findViewById(R.id.chip2);
-
+        final Model model = (Model) getIntent().getSerializableExtra("model");
         //Eventos
 
-       image_button.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        image_button.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                   @Override
                   public void onFocusChange (View v, boolean hasFocus){
-                     Intent intent = null;
-                    intent = new Intent(Buttons.this, FormActivity.class);
-               }
+                      Snackbar.make(v, "FocusChangeLister", Snackbar.LENGTH_LONG)
+                              .setAction("Action", null).show();
+                }
        });
 
-        button.setOnClickListener(new View.OnClickListener() {
+       button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Diste click en el button", Snackbar.LENGTH_LONG)
@@ -71,13 +70,25 @@ public class Buttons extends AppCompatActivity {
             }
         });
 
+        chip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Diste click en el chip", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         checkBox.setOnLongClickListener(new View.OnLongClickListener() {
 
             public boolean  onLongClick(View v){
+                Snackbar.make(v, "Long click", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 click = true;
                 return click;
             }
         });
+
+
 
         //-----------------------------------------------------------------
         radio_button.setOnTouchListener(new View.OnTouchListener() {

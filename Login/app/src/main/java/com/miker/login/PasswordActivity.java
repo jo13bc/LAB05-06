@@ -93,10 +93,10 @@ public class PasswordActivity extends AppCompatActivity {
             confirm_password.setError("The Confirm Password can't be empty");
             result = false;
         }
-        if (confirm_password.getText().toString() != new_password.getText().toString()) {
-            confirm_password.setError("The Confirm Password is not the same than the New Password");
-            result = false;
-        }
+     //   if (new_password.getText() != confirm_password.getText() ) {
+     //        confirm_password.setError("The Confirm Password is not the same than the New Password");
+     //      result = false;
+    //}
         if (us == null) {
             old_password.setError("Usuario o Password Incorrecto");
             result = false;
